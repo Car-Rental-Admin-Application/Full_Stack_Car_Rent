@@ -1,0 +1,57 @@
+/* Conteneur principal */
+.logs-container {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+/* Section filtre */
+.filter-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.search-field {
+  width: 50%;
+}
+
+.filter-btn {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+}
+
+/* Table */
+table {
+  width: 100%;
+  background: white;
+}
+
+.mat-header-cell {
+  background-color: #c0c0c0;
+  font-weight: bold;
+  color: black;
+}
+
+/* Badge de statut */
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.status-badge.available {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Boutons d'action */
+.action-btn {
+  margin-right: 8px;
+}
+
+/* Image dans le tableau */
+img {
+  max-height: 80px;
+  object-fit: contain;
+}

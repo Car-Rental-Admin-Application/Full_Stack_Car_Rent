@@ -1,0 +1,63 @@
+<div class="dashboard-container">
+  <!-- Première ligne -->
+  <div class="row row-spacing">
+    <div class="col">
+      <mat-card class="stat-card">
+        <mat-card-header>
+          <mat-card-title>Total Cars</mat-card-title>
+          <mat-icon class="stat-icon">directions_car</mat-icon>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">{{totalCars}}</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col">
+      <mat-card class="stat-card">
+        <mat-card-header>
+          <mat-card-title>Total Sold Last Month</mat-card-title>
+          <mat-icon class="stat-icon">attach_money</mat-icon>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">{{totalSold}}</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Deuxième ligne -->
+  <div class="row">
+    <div class="col">
+      <mat-card class="stat-card">
+        <mat-card-header>
+          <mat-card-title>Stats</mat-card-title>
+          <mat-icon class="stat-icon">bar_chart</mat-icon>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="pie-chart-container">
+            <div class="pie-chart">
+              <div class="pie-center">{{toyotaPercentage}}%</div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div class="legend-color toyota"></div>
+                <span>Toyota</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color chevrolet"></div>
+                <span>Chevrolet</span>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col">
+      <mat-card class="image-card">
+        <img mat-card-image src="assets/logo.png" alt="Car Image">
+      </mat-card>
+    </div>
+  </div>
+</div>

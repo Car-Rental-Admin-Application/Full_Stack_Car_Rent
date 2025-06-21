@@ -1,0 +1,29 @@
+<mat-toolbar class="navbar">
+  <div class="container-fluid">
+    <div class="navbar-content">
+      <div class="navbar-nav">
+        <a mat-button
+           class="nav-link"
+           routerLink="/dashboard"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+
+        <a mat-button
+           class="nav-link"
+           routerLink="/cars"
+           routerLinkActive="active">Cars</a>
+
+        <a mat-button
+           class="nav-link"
+           routerLink="/logs"
+           routerLinkActive="active">Logs</a>
+      </div>
+
+      <button mat-icon-button class="power-icon" (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

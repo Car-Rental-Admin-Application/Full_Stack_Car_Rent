@@ -1,0 +1,26 @@
+<div class="main-container">
+  <!-- Barre d'actions -->
+  <div class="action-bar">
+    <mat-form-field appearance="outline" class="search-box">
+      <mat-label>Rechercher une voiture</mat-label>
+      <input matInput placeholder="Rechercher une voiture...">
+    </mat-form-field>
+
+    <button mat-stroked-button class="action-btn filter-btn">Filtrer</button>
+    <button mat-stroked-button color="warn" class="action-btn delete-btn">Supprimer multiple</button>
+    <button mat-raised-button color="primary" class="action-btn add-btn">Ajouter voiture +</button>
+  </div>
+
+  <!-- Grille de voitures -->
+  <div class="grid-container">
+    <mat-card class="car-card" *ngFor="let car of cars">
+      <img mat-card-image [src]="car.imageUrl" alt="{{ car.brand }} {{ car.model }}">
+      <mat-card-content>
+        <h3>{{ car.brand }} {{ car.model }}</h3>
+        <p>Prix : {{ car.price }} DH</p>
+        <p>Kilométrage : {{ car.km }} km</p>
+        <p>Status : {{ car.status }} </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

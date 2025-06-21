@@ -1,0 +1,124 @@
+/* login.component.scss */
+.container {
+  display: flex;
+  width: 100%;
+  height: 700px;
+  max-width: 1200px;
+  margin: auto;
+  background: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  font-family: "Montserrat", sans-serif;
+
+  /* Section Image */
+  .image-section {
+    flex: 1;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  /* Section Login */
+  .login-section {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* Header */
+    .login-header {
+      margin-bottom: 40px;
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        letter-spacing: 2px;
+        color: #333;
+        text-align: center;
+      }
+    }
+
+    /* Form Fields - Surcharge Material pour votre design */
+    .mat-form-field {
+      width: 100%;
+      margin-bottom: 25px;
+
+      /* Label */
+      .mat-form-field-label {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      /* Input */
+      .mat-input-element {
+        padding: 12px 0;
+        font-size: 1rem;
+        background: transparent;
+      }
+
+      /* Outline (bordure) */
+      .mat-form-field-outline {
+        background-color: #f8f8f8;
+        border-radius: 4px;
+      }
+
+      /* Couleur active */
+      &.mat-focused .mat-form-field-outline-thick {
+        color: #4444ff;
+      }
+    }
+
+    /* Forgot Password */
+    .forgot-password {
+      text-align: right;
+      margin-bottom: 25px;
+
+      a {
+        color: #4444ff;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Submit Button - Surcharge Material */
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      background: #dd9966 !important;
+      color: white !important;
+      border: none !important;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #cc8855 !important;
+      }
+
+      /* Supprime l'ombre Material */
+      &.mat-raised-button {
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+
+    .image-section {
+      display: none;
+    }
+
+    .login-section {
+      padding: 30px;
+    }
+  }
+}
