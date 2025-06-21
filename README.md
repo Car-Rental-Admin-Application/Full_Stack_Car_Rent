@@ -306,12 +306,16 @@ This project is a **full-stack vehicle rental management platform** featuring:
 - "Forgot password?" link (future feature).
 - Modern, split-screen design with a car image and form.
 
+![Authentication Screenshot](https://github.com/user-attachments/assets/3190c5e1-e04e-4136-abb9-fea090071046)
+
 ### 2. Dashboard
 
 - Overview of key metrics: total cars, cars sold last month, etc.
 - Donut chart for brand distribution.
 - Visual car preview.
 - Modular card-based layout.
+
+![Dashboard Screenshot](https://github.com/user-attachments/assets/e0061275-b0e0-4a38-9e3e-125ead6a74b7)
 
 ### 3. Vehicle Management
 
@@ -320,11 +324,15 @@ This project is a **full-stack vehicle rental management platform** featuring:
 - Bulk delete option.
 - Vehicles displayed as cards with image, model, price, transmission, and mileage.
 
+![Cars Screenshot](https://github.com/user-attachments/assets/e4f4c599-b63b-4566-9ecb-7c7208d93683)
+
 ### 4. Logs
 
 - Chronological list of application events.
 - Details include date, time, user, action, and more.
 - (Planned) Search and filter logs.
+
+![Logs Screenshot](https://github.com/user-attachments/assets/b6a66dd4-eeb7-409a-84a1-3ea2f51b688b)
 
 ---
 
