@@ -6,7 +6,6 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 ![Kafka](https://img.shields.io/badge/Kafka-231F20?style=for-the-badge&logo=apache-kafka&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Angular Material](https://img.shields.io/badge/Angular%20Material-757575?style=for-the-badge&logo=angular&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
@@ -37,17 +36,13 @@ A secure admin authentication and vehicle management system built with a microse
   - [Installation](#installation)
     - [Backend Setup](#backend-setup)
     - [Frontend Setup](#frontend-setup)
-    - [Docker Setup (Recommended)](#docker-setup-recommended)
   - [Usage](#usage)
     - [Running Locally](#running-locally)
       - [Backend](#backend-1)
       - [Frontend](#frontend-1)
-    - [Running with Docker](#running-with-docker)
-  - [Testing the Services](#testing-the-services)
+  - [Testing the Services with GraphQL](#testing-the-services-with-graphql)
     - [Auth Service](#auth-service)
     - [Vehicle Service](#vehicle-service)
-    - [Log Service](#log-service)
-    - [Frontend](#frontend-2)
   - [Application Interfaces](#application-interfaces)
     - [1. Authentication Interface](#1-authentication-interface)
     - [2. Dashboard](#2-dashboard)
@@ -99,7 +94,6 @@ This project is a **full-stack vehicle rental management platform** featuring:
 - **MongoDB** (Database)
 - **Redis** (Caching)
 - **Kafka** (Event streaming)
-- **Docker** (Containerization)
 
 ### Frontend
 
@@ -127,7 +121,27 @@ This project is a **full-stack vehicle rental management platform** featuring:
    cd ../log-service && npm install
    cd ../..
    ```
-3. **Start MongoDB, Redis, and Kafka** (see [Usage](#usage) for details).
+3. **Install required dependencies for each service:**
+
+   **Auth Service:**
+
+   ```bash
+   npm install @nestjs/passport passport passport-jwt
+   npm install @nestjs/mongoose mongoose
+   npm install bcrypt @types/bcrypt
+   npm install jsonwebtoken @types/jsonwebtoken
+   npm install @nestjs/config
+   npm install cookie-parser @types/cookie-parser
+   ```
+
+   **Vehicle Service:**
+
+   ```bash
+   npm install @nestjs/graphql graphql apollo-server-express
+   npm install @nestjs/mongoose mongoose
+   npm install redis ioredis
+   npm install @nestjs/config
+   ```
 
 ### Frontend Setup
 
@@ -142,19 +156,6 @@ This project is a **full-stack vehicle rental management platform** featuring:
 3. **Install Angular CLI (if not already installed):**
    ```bash
    npm install -g @angular/cli
-   ```
-
-### Docker Setup (Recommended)
-
-1. **Install Docker Desktop:** [docker.com](https://docker.com/)
-2. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Car-Rental-Admin-Application/Backend.git
-   cd Backend
-   ```
-3. **Start all services and infrastructure:**
-   ```bash
-   docker-compose up --build
    ```
 
 ---
@@ -198,55 +199,102 @@ This project is a **full-stack vehicle rental management platform** featuring:
   ```
 - Open [http://localhost:4200/](http://localhost:4200/) in your browser.
 
-### Running with Docker
-
-- From the `Backend` directory:
-  ```bash
-  docker-compose up --build
-  ```
-- All services (backend and infrastructure) will start automatically.
-- For the frontend, you may need to run `ng serve` in the `Frontend` directory separately unless included in your Docker setup.
-
 ---
 
-## Testing the Services
+## Testing the Services with GraphQL
 
 ### Auth Service
 
-- Open: [http://localhost:4001/graphql](http://localhost:4001/graphql)
-- Example login mutation:
+- Open: [http://localhost:3001/graphql](http://localhost:3001/graphql)
+- **Login Mutation:**
   ```graphql
   mutation {
     login(username: "admin", password: "admin123")
   }
   ```
-- Example create admin mutation:
+- **Create Admin Mutation:**
   ```graphql
   mutation {
     createAdmin(username: "newadmin", password: "newpass123")
   }
   ```
-- For protected operations, add this header:
+- **Authorization Header for Protected Operations:**
   ```json
-  { "Authorization": "Bearer YOUR_TOKEN_HERE" }
+  {
+    "Authorization": "Bearer YOUR_TOKEN_HERE"
+  }
   ```
 
 ### Vehicle Service
 
-- Open: [http://localhost:4003/graphql](http://localhost:4003/graphql)
-- Example queries and mutations are available in the original backend README.
-
-### Log Service
-
-- Open: [http://localhost:4002](http://localhost:4002)
-- You should see a welcome message.
-
-### Frontend
-
-- Open: [http://localhost:4200/](http://localhost:4200/)
-- Login with default credentials:
-  - **Username:** `admin`
-  - **Password:** `admin123`
+- Open: [http://localhost:3002/graphql](http://localhost:3002/graphql)
+- **Find All Vehicles:**
+  ```graphql
+  query {
+    vehicles {
+      model
+      brand
+      year
+      status
+      price
+    }
+  }
+  ```
+- **Find One Vehicle:**
+  ```graphql
+  query {
+    vehicle(id: "6855208a7e95a553f3be7b79") {
+      brand
+      model
+      year
+    }
+  }
+  ```
+- **Create Vehicle:**
+  ```graphql
+  mutation {
+    addVehicle(
+      input: {
+        model: "Duster"
+        brand: "Dacia"
+        year: 2023
+        price: 23000
+        status: "sold"
+        image: "duster.jpg"
+        km: 70
+      }
+    ) {
+      model
+    }
+  }
+  ```
+- **Update Vehicle:**
+  ```graphql
+  mutation {
+    updateVehicle(
+      id: "68551e907e95a553f3be7b73"
+      input: {
+        model: "Divo"
+        brand: "Bugatti"
+        year: 2020
+        status: "sold"
+        price: 5800000
+        image: "divo.jpg"
+        km: 0
+      }
+    ) {
+      model
+    }
+  }
+  ```
+- **Delete Vehicle:**
+  ```graphql
+  mutation {
+    deleteVehicle(id: "6855208a7e95a553f3be7b79") {
+      model
+    }
+  }
+  ```
 
 ---
 
@@ -282,10 +330,10 @@ This project is a **full-stack vehicle rental management platform** featuring:
 
 ## Troubleshooting
 
-- **"Server cannot be reached"**: Ensure Docker is running, wait for services to start, check for port conflicts.
-- **"Connection refused"**: Make sure MongoDB, Redis, and Kafka are running. Use `docker-compose ps` to check containers.
-- **"Cannot find module"**: Run `npm install` in each service directory or use `docker-compose up --build`.
-- **Services won't start**: Check Docker Desktop, disk space, and try `docker system prune`.
+- **"Server cannot be reached"**: Ensure MongoDB, Redis, and Kafka are running, and all services are started on the correct ports.
+- **"Connection refused"**: Make sure MongoDB, Redis, and Kafka are running. Check service logs for errors.
+- **"Cannot find module"**: Run `npm install` in each service directory.
+- **Services won't start**: Check your environment, disk space, and configuration files.
 
 ---
 
@@ -303,4 +351,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-**Tip:** For the easiest setup, use Docker to run all backend services and infrastructure. For frontend development, use Angular CLI for hot-reloading and rapid UI changes.
+**Tip:** For the easiest setup, ensure all dependencies are installed and infrastructure services (MongoDB, Redis, Kafka) are running before starting the backend services. For frontend development, use Angular CLI for hot-reloading and rapid UI changes.
