@@ -150,3 +150,66 @@ Démarrer l'application:
 ```bash
 ng serve
 ```
+# Structure des Projets
+## Frontend
+
+```
+frontend/
+├── src/
+│   ├── app/
+│   │   ├── core/          # Services globaux, intercepteurs
+│   │   ├── shared/        # Composants partagés
+│   │   ├── pages/         # Vues principales
+│   │   │   ├── auth/      # Authentification
+│   │   │   ├── dashboard/ # Tableau de bord
+│   │   │   ├── vehicles/  # Gestion véhicules
+│   │   │   └── logs/      # Journalisation
+│   │   ├── app.routes.ts  # Routes
+│   │   └── app.module.ts  # Module principal
+├── assets/                # Images, polices
+└── environments/          # Configs par environnement
+```
+## Backend
+```
+backend/
+├── auth-service/          # Authentification JWT
+├── vehicle-service/       # Gestion véhicules
+├── log-service/           # Journalisation
+├── docker-compose.yml     # Configuration Docker
+└── .env                   # Variables d'environnement
+```
+# 🧪 Tests
+## Frontend
+
+```bash
+ng test
+```
+
+## Backend (pour chaque service)
+```bash
+npm run test
+```
+
+# Déploiement
+## Environnement de production
+- Build des images Docker:
+
+```bash
+docker-compose -f docker-compose.prod.yml build
+Démarrer les conteneurs:
+```
+
+```bash
+docker-compose -f docker-compose.prod.yml up -d
+```
+# 📹 video demonstratif : 
+
+# Auteurs
+Mohammed CHERKAOUI - DevOps - G[itHub](https://github.com/yousraMsaouri)
+
+Wassim ZAAIT - Backend - [GitHub](https://github.com/psyphonz)
+
+Yousra Msaouri Charroud - Frontend - [GitHub](https://github.com/mohammed761-dl)
+
+# Licence
+Ce projet est sous licence MIT - voir le fichier LICENSE pour plus de détails.
