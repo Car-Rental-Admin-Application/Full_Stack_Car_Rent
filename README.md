@@ -344,6 +344,21 @@ This project is a **full-stack vehicle rental management platform** featuring:
 - **Services won't start**: Check your environment, disk space, and configuration files.
 
 ---
+## 🚀 Deployment
+
+The application uses Docker Compose to deploy backend microservices (Auth, Vehicle, and Log Services) along with their dependencies (MongoDB, Redis, Kafka). An automated CI/CD pipeline with GitHub Actions handles building, testing, and continuous deployment. The pipeline includes:
+
+- Docker image building for each service
+
+- Unit and integration test execution
+
+- Automatic production deployment after validation
+
+- Version management via Docker Hub
+
+The production configuration is optimized for horizontal scalability and high availability, featuring secure environment variables and integrated monitoring.
+
+This keeps it concise while covering all key technical aspects of your deployment process in English. The structure remains the same but with proper technical terminology translation. 
 
 ## Authors & License
 
