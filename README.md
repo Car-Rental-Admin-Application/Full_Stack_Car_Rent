@@ -205,11 +205,11 @@ docker-compose -f docker-compose.prod.yml up -d
 # 📹 video demonstratif : 
 
 # Auteurs
-Mohammed CHERKAOUI - DevOps - G[itHub](https://github.com/yousraMsaouri)
+Mohammed CHERKAOUI - DevOps - [GitHub](https://github.com/mohammed761-dl)
 
 Wassim ZAAIT - Backend - [GitHub](https://github.com/psyphonz)
 
-Yousra Msaouri Charroud - Frontend - [GitHub](https://github.com/mohammed761-dl)
+Yousra Msaouri Charroud - Frontend - G[itHub](https://github.com/yousraMsaouri)
 
 # Licence
 Ce projet est sous licence MIT - voir le fichier LICENSE pour plus de détails.
