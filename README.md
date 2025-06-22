@@ -360,6 +360,122 @@ The production configuration is optimized for horizontal scalability and high av
 
 This keeps it concise while covering all key technical aspects of your deployment process in English. The structure remains the same but with proper technical terminology translation. 
 
+## 🚀 Enterprise Deployment Architecture
+### CI/CD Pipeline & GitFlow Implementation
+Our GitHub Actions pipeline orchestrates the full deployment lifecycle:
+
+- Branch Strategy: GitFlow with protected main (prod) and develop branches
+
+- Automated Workflows:
+
++ SonarQube scanning on PRs (TypeScript/Node.js analysis)
+
++ Jest test suites with 85% coverage threshold
+
++ Docker image builds for each NestJS microservice
+
++ Helm chart versioning for Kubernetes deployments
+
+- Environment Promotion:
+
++ Dev → Stage → Prod with manual approval gates
+
++ Automated canary testing using K6 (GraphQL endpoint validation)
+
+## Microservices Deployment (Kubernetes)
+### Service-Specific Configuration:
+ ``` YAML
+# auth-service deployment (JWT/NestJS)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 15%
+  template:
+    spec:
+      containers:
+      - name: auth
+        image: registry/auth-service:1.2.0
+        ports:
+        - containerPort: 4001 # JWT Auth port
+        env:
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: auth-secrets
+              key: jwt-key
+        - name: MONGO_URI
+          value: "mongodb://mongodb-auth:27017/auth?replicaSet=rs0"
+ ```
+### Data Layer Configuration:
+
+- MongoDB: StatefulSet with 3-node replica set
+
+- Redis: Sentinel configuration for high availability
+
+- Kafka: 3-broker cluster with persistent volumes
+
+## Monitoring & Observability
+### Tech-Specific Monitoring:
+
+### NestJS Services:
+
+- Prometheus metrics endpoint
+
+- Distributed tracing with Jaeger
+
+- GraphQL query performance dashboards
+
+### Angular Frontend:
+
+- Real User Monitoring (RUM) with OpenTelemetry
+
+- Core Web Vitals tracking
+
+### Key Performance Indicators
+- GraphQL: <200ms P99 latency (measured with Apollo Studio)
+
+- JWT Auth: 50ms token validation (Redis-cached)
+
+- Kafka: <5ms event propagation between services
+
+- Angular: 90+ Lighthouse score (SSR-enabled)
+
+### Security Implementation
+- Network Policies:
+
+  + Isolate MongoDB pods from frontend
+
+  + Restrict Redis access to auth-service only
+
+- Secret Management:
+
+  + JWT keys rotated every 7 days
+
+  + MongoDB credentials via Vault injections
+
+- Compliance:
+
+  + Regular OWASP ZAP scans for Angular routes
+
+  + GraphQL query depth limiting
+
+This architecture leverages your full tech stack while ensuring enterprise-grade:
+
+ - Scalability: Horizontal pod autoscaling for NestJS services
+
+ - Resilience: Circuit breakers in RxJS HTTP clients
+
+ - Performance: Redis cache for JWT validation and MongoDB query results
+
+ - Maintainability: TypeScript typing across frontend/backend
+
+
 ## Authors & License
 
 ### Authors
